@@ -27,6 +27,14 @@ chrome.storage.local.get('BaekjoonHub_token', (data) => {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           /* Show MAIN FEATURES */
+          const userData = JSON.parse(xhr.responseText); // GitHub 사용자 데이터 파싱
+          const githubUsername = userData.login; // 사용자 이름 추출
+
+          // 추출한 사용자 이름을 Chrome Storage에 저장
+          chrome.storage.local.set({ GithubUsername: githubUsername }, () => {
+              console.log('GitHub Username saved:', githubUsername);
+          });
+
           chrome.storage.local.get('mode_type', (data2) => {
             if (data2 && data2.mode_type === 'commit') {
               $('#commit_mode').show();

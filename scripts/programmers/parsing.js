@@ -45,10 +45,25 @@ async function parseData() {
 
 async function makeData(origin) {
   const { problem_description, problemId, level, result_message, division, language_extension, title, runtime, memory, code, language } = origin;
+
+  // --- GitHub 사용자 이름 가져오기 시작 ---
+  let githubUsername = '';
+  try {
+    const result = await new Promise((resolve) => {
+      chrome.storage.local.get(['GithubUsername'], resolve);
+    });
+    // 저장된 사용자 이름이 없으면 'default_user'로 설정
+    githubUsername = result.GithubUsername || 'default_user';
+  } catch (error) {
+    console.error("GitHub 사용자 이름 로드 중 오류 발생:", error);
+    githubUsername = 'error_retrieving_username'; // 오류 발생 시 대체 값
+  }
+  // --- GitHub 사용자 이름 가져오기 끝 ---
+
   const levelWithLv = `${level}`.includes('lv') ? level : `lv${level}`.replace('lv', 'level ');
   const directory = await getDirNameByOrgOption(`프로그래머스/${division}/${levelWithLv}/${convertSingleCharToDoubleChar(title)}`, language);
   const message = `[${levelWithLv}] Title: ${title}, Time: ${runtime}, Memory: ${memory} -BaekjoonHub`;
-  const fileName = `${convertSingleCharToDoubleChar(title)}.${language_extension}`;
+  const fileName = `${convertSingleCharToDoubleChar(title)}-${githubUsername}.${language_extension}`;
   const dateInfo = getDateString(new Date(Date.now()));
   // prettier-ignore
   const readme =
