@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>확장 프로그램 설정</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        label { display: block; margin-bottom: 5px; }
+        input[type="text"] { width: 300px; padding: 8px; margin-bottom: 10px; }
+        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        #status { margin-top: 10px; color: green; }
+    </style>
+</head>
+<body>
+    <h1>확장 프로그램 설정</h1>
+    <label for="githubNicknameInput">GitHub 닉네임:</label>
+    <input type="text" id="githubNicknameInput" placeholder="예: your-github-id">
+    <button id="saveButton">설정 저장</button>
+    <div id="status"></div>
+
+    <script src="options.js"></script>
+</body>
+</html>
