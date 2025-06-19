@@ -63,7 +63,7 @@ async function makeData(origin) {
   const levelWithLv = `${level}`.includes('lv') ? level : `lv${level}`.replace('lv', 'level ');
   const directory = await getDirNameByOrgOption(`프로그래머스/${division}/${levelWithLv}/${convertSingleCharToDoubleChar(title)}`, language);
   const message = `[${levelWithLv}] Title: ${title}, Time: ${runtime}, Memory: ${memory} -BaekjoonHub`;
-  const fileName = `${convertSingleCharToDoubleChar(title)}-${githubUsername}.${language_extension}`;
+  const fileName = `${convertSingleCharToDoubleChar(title)}_${githubUsername}.${language_extension}`;
   const dateInfo = getDateString(new Date(Date.now()));
   // prettier-ignore
   const readme =
